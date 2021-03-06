@@ -21,9 +21,22 @@ async def meme_generator(ctx):
 	await ctx.send('Here is your meme: ')
 	await ctx.send(meme["meme_title"])
 	target_message = await ctx.send(meme["meme_link"])
+	async for msg in ctx.history(limit=10000):
+		if msg.id == target_message.id:
+			# cache_msg = discord.utils.get(bot.messages, id=target_message.id)
+			for reaction in msg.reactions:
+				print("GOOD!")
+				await on_reaction_add(reaction, DISCORD_DM_USER, ctx)
 
-
-
+# @bot.event
+async def on_reaction_add(reaction, user, ctx, message_id):
+    if bot.is_owner(user) and str(reaction.emoji) == '👍':
+        await ctx.send("Okay, approved, I will send the meme to the channel")
+    elif bot.is_owner(user) and str(reaction.emoji) == '👎':
+        await ctx.send("Denied, let me look for another meme")
+    else:
+        return
+  
 @bot.command(name='roll_dice', help='Simulates rolling dice.')
 async def roll(ctx, number_of_dice: int, number_of_sides: int):
 	dice = [
