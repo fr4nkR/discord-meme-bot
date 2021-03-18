@@ -41,5 +41,4 @@ async def meme_generator(ctx):
         elif str(payload.emoji) == "👎" and current_message == target_message.id:
             await ctx.author.send("Bad Meme! Let me look for another meme.")
 
-
 bot.run(TOKEN)
