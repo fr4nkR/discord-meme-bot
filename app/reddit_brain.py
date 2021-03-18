@@ -233,5 +233,5 @@ def get_memes():
     return random.choice(memes)
 
 
-if __name__=="__main__": 
-    get_memes()
+# if __name__=="__main__": 
+#     get_memes()
