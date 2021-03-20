@@ -3,6 +3,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 from reddit_brain import get_memes
 import discord
+from db_commands import insert_user
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -12,7 +13,10 @@ bot = commands.Bot(command_prefix='!')
 
 @bot.command(name='memenow', help='Gets a random CS/Cybersecurity meme')
 async def meme_generator(ctx):
-    """Gets a random meme from Reddit."""
+    """Gets a random CS/Cybersecurity meme from Reddit."""
+    
+    # Add syntax to see if user is registered, else, display a message to the user
+    # explaining this and give him/her the command to register.
     
     meme = get_memes()
     await ctx.author.send('Here is your meme: ')
@@ -40,5 +44,16 @@ async def meme_generator(ctx):
 
         elif str(payload.emoji) == "👎" and current_message == target_message.id:
             await ctx.author.send("Bad Meme! Let me look for another meme.")
+
+
+@bot.command(name='register', help='Registers a user so this user can perform commands against this bot')
+async def register_user(ctx):
+    """Registers a user so this user can perform commands against this bot."""
+    
+    user_id = ctx.message.author.id
+    username = ctx.message.author.name
+    insert_user(user_id, username, )
+    await ctx.author.send('You are now registered!')
+    
 
 bot.run(TOKEN)
