@@ -7,9 +7,9 @@ import discord
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 DISCORD_DM_USER = os.getenv('DISCORD_DM_USER')
-bot = commands.Bot(command_prefix='!')
 BOT_OWNER_DM_CHANNEL_ID = os.getenv('BOT_OWNER_DM_CHANNEL_ID')
 
+bot = commands.Bot(command_prefix='!')
 @bot.command(name='memenow', help='Gets a random CS/Cybersecurity meme')
 async def meme_generator(ctx):
     """Gets a random meme from Reddit."""

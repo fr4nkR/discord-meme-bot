@@ -206,15 +206,16 @@ def append_memes(path, memes_list):
       # To ignore the CSV header
       if url != 'Url':
         meme_to_append = {
-          "meme_link_image" : url[2:-1], # This line is simply to format the link so that when it is sent through discord, it only keeps the actual link
           "meme_title" : "Title "+title[2:-1],
           "meme_link" : "Source: "+url[2:-1]
         }
+        insert_meme(link=str(meme_to_append["meme_link"]), title=str(meme_to_append["meme_title"]))
         memes_list.append(meme_to_append)
     
     f.close()
     
 def get_memes():
+  
     load_dotenv()
     REDDIT_CLIENT_ID = os.getenv('REDDIT_CLIENT_ID')
     REDDIT_CLIENT_SECRET = os.getenv('REDDIT_CLIENT_SECRET')
@@ -233,5 +234,5 @@ def get_memes():
     return random.choice(memes)
 
 
-if __name__=="__main__": 
-    get_memes()
+# if __name__=="__main__": 
+#     get_memes()
