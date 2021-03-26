@@ -52,7 +52,7 @@ async def register_user(ctx):
     
     user_id = ctx.message.author.id
     username = ctx.message.author.name
-    insert_user(user_id, username, )
+    insert_user(user_id, username
     await ctx.author.send('You are now registered!')
     
 

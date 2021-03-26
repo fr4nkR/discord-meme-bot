@@ -1,3 +1,6 @@
+# This particular file was gathered from
+# https://github.com/asjadanis/reddit-scrapper/blob/master/reddit-scrapper.py
+
 import praw
 import argparse
 import urllib
@@ -174,18 +177,6 @@ class RedditCollector:
       })
       csv = dataframe.to_csv(gifs_path, index=True, header=True)
 
-    if len(self.post_ids) > 0:
-      posts_path = os.path.join(dirpath, 'posts', 'posts.csv')
-      dataframe = pd.DataFrame({
-        'Title': self.post_titles,
-        'Score': self.post_scores,
-        'Url': self.post_urls,
-        'Timestamp': self.post_timestamps,
-        'ID': self.post_ids,
-        'Text': self.post_text
-      })
-      csv = dataframe.to_csv(posts_path, index=True, header=True)
-
     if len(self.other_ids) > 0:
       others_path = os.path.join(dirpath, 'others', 'others.csv')
       dataframe = pd.DataFrame({
@@ -209,7 +200,6 @@ def append_memes(path, memes_list):
           "meme_title" : "Title "+title[2:-1],
           "meme_link" : "Source: "+url[2:-1]
         }
-        insert_meme(link=str(meme_to_append["meme_link"]), title=str(meme_to_append["meme_title"]))
         memes_list.append(meme_to_append)
     
     f.close()
